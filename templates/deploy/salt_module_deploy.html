@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block header-css %}
+    <link rel="stylesheet" type="text/css" href="/static/css/salt.css"/>
+{% endblock %}
+
+
+{% block page-content-title %}
+
+    <div class="asset_list_title">部署管理</div>
+
+{% endblock %}
+
+{% block page-nav-tab %}
+    <ol class="breadcrumb">
+        <li class="active">配置管理</li>
+        <li>模块部署</li>
+    </ol>
+
+{% endblock %}
+
+{% block page-content %}
+
+       <div class="row">
+            <div class="col-md-12">
+                 <div class="panel panel-default">
+                      <div class="panel-body">
+                             <form class="form-horizontal form-border" method="post" enctype="multipart/form-data" action="/deploy/module_deploy/?action=deploy">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">目标主机</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" name="tgt" value={{ tgt }}>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                          <label class="col-sm-3 control-label">安装模块</label>
+                                          <div class="col-sm-5">
+                                              <div>
+                                                   <label class="checkbox-inline col-sm-3">
+                                                       <input class="icheck" type="checkbox" value="nginx" name="module">Nginx</label>
+                                                   <label class="checkbox-inline col-sm-3">
+                                                       <input class="icheck" type="checkbox" value="php" name="module">PHP</label>
+                                                   <label class="checkbox-inline col-sm-3">
+                                                       <input class="icheck" type="checkbox" value="mysql" name="module">MySQL</label>
+                                                   <label class="checkbox-inline ">
+                                                       <input class="icheck" type="checkbox" value="redis" name="module">Redis</label>
+                                              </div>
+                                              <div>
+                                                   <label class="checkbox-inline col-sm-3">
+                                                       <input class="icheck" type="checkbox" value="memcached" name="module">Memcached</label>
+                                                   <label class="checkbox-inline col-sm-3">
+                                                       <input class="icheck" type="checkbox" value="zabbix" name="module">Zabbix</label>
+                                                   <label class="checkbox-inline col-sm-3">
+                                                       <input class="icheck" type="checkbox" value="logstash" name="module">日志采集</label>
+                                                   <label class="checkbox-inline">
+                                                       <input class="icheck" type="checkbox" value="sysinit" name="module">初始化</label>
+                                              </div>
+                                          </div>
+                                          <div class="form-group col-sm-2 " style="line-height: 53px">
+                                             <input type="hidden" name="mod" value={{ module }}>
+                                             <div>
+                                                  <button type="submit" class="btn btn-primary sys_form_btn">提交</button>
+                                             </div>
+                                          </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                          <label class="col-sm-3 control-label">返回结果:</label>
+                                          <div class="col-sm-6">
+                                              {{ ret }}
+{#                                               <textarea class="form-control" rows="10">{{ ret }}</textarea>#}
+                                          </div>
+                                    </div>
+                             </form>
+                      </div>
+                 </div>
+            </div>
+       </div>
+       <!--row end-->
+
+{% endblock %}

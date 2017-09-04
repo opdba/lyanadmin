@@ -1,0 +1,164 @@
+.table_th_color{
+    background-color: #3c8dbc;
+    color: white;
+}
+.a_sub{
+    background-color: #3c8dbc;
+    color: #FFF;
+    width: 200px;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 14px;
+    cursor:pointer;
+}
+a{
+    cursor:pointer;
+}
+.a_sub:hover{
+    background-color: #2798cc;
+    color: #FFF;
+}
+.tab_h3{
+    background-color:#E2E7EC;
+    color: #183DC3;
+}
+
+.err-popover-out {
+    position: absolute;
+    left: 325px;
+    top: 6px;
+    width: 100%;
+    color: white;
+}
+
+.err-popover {
+    display: none;
+    position: relative;
+    border-radius: 4px;
+    background-color: #CF404E;
+    padding: 0 5px;
+}
+
+.tri-right {
+    position: absolute;
+    overflow: hidden;
+    border: solid transparent;
+    border-width: 6px;
+    border-right-color: #CF404E;
+    top: 8px;
+    left: -11px;
+    height: 0;
+    width: 0px;
+    z-index: 2;
+}
+.tab-base{
+    margin-top: 15px;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.asset-info-table >tbody>tr>td{
+    padding-top: 10px;
+}
+
+.logo-text{
+    margin-top:15px ;
+    margin-left:10px ;
+    color: #d0302e;
+}
+.asset_det_title{
+    color: #0939E6;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+.asset_list_title{
+    margin-bottom: 25px;
+}
+.mel_left{
+    float: left;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+.asset_btn_{
+    padding-left: 15px;
+}
+.asset_btn_ input{
+    width: 75px;
+}
+.display_n{
+    display: none;
+}
+.save_btn{
+    width: 150px;
+}
+.model_top{
+    top: 75px;
+}
+
+.model_close{
+    float: right;
+    font-size: 16px;
+    text-shadow: 0 1px 0 #fff;
+    border: 0;
+    background: 0 0;
+    color: white;
+}
+.model_close:hover{color:#DACACA;}
+
+.modal-content{
+    border-radius: 6px;
+}
+.asset_mod_header{
+    background-color: #3c8dbc;
+    color: white;
+    border-radius: 6px 6px 0 0;
+}
+.checkbox_choice{
+    background-color:#F1F1F1;
+}
+
+.show_hide_check input[type=checkbox]{
+    margin-left: 10px;
+    margin-right: 15px;
+}
+.show_hide_check li{
+    font-size: 17px;
+    cursor: default;
+}
+
+tbody tr{
+    cursor: default;
+}
+
+.show_hide_check li:hover{
+    background-color:#EADADA;
+}
+
+.my_modal_position .modal-dialog{
+    margin-top: 260px;
+}
+
+tbody tr td{
+    border: 1px;
+}
+.asset-info-table{
+    width: 80%;
+    margin-left: 10%;
+}
+.asset-info-table .col-md-2{
+    text-align: right;
+}
+.badge-use{
+    background-color: #0c0c0c;
+}
+.badge-stop{
+    background-color: red;
+}

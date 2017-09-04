@@ -1,0 +1,89 @@
+<!DOCTYPE>
+<HTML>
+<HEAD>
+    <TITLE>哎呀…您访问的页面不存在</TITLE>
+    <meta charset="utf-8">
+    <META http-equiv=X-UA-Compatible content="IE=edge">
+    <META http-equiv=Content-Type content="text/html; charset=gb2312">
+    <LINK type=text/css rel=stylesheet>
+    <STYLE>
+    BODY {
+        BACKGROUND: #dad9d7; FONT-FAMILY: "微软雅黑"
+    }
+    IMG {
+        BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+    }
+    A  {
+        CURSOR: pointer
+    }
+    UL {
+        LIST-STYLE-TYPE: none
+    }
+    LI {
+        LIST-STYLE-TYPE: none
+    }
+    TABLE {
+        TABLE-LAYOUT: fixed
+    }
+    TABLE TR TD {
+        WORD-BREAK: break-all; WORD-WRAP: break-word
+    }
+    A {
+        TEXT-DECORATION: none; outline: none
+    }
+    A:hover {
+        TEXT-DECORATION: underline
+    }
+    .bg {
+        BACKGROUND: url(/static/dist/error_img/01.jpg) #dad9d7 no-repeat center top; LEFT: 0px; OVERFLOW: hidden; WIDTH: 100%; POSITION: absolute; TOP: 0px; HEIGHT: 100%
+    }
+    .cont {
+        MARGIN: 0px auto; WIDTH: 500px; LINE-HEIGHT: 20px
+    }
+    .c1 {
+        HEIGHT: 360px; TEXT-ALIGN: center
+    }
+    .c1 .img1 {
+        MARGIN-TOP: 180px
+    }
+    .c1 .img2 {
+        MARGIN-TOP: 165px
+    }
+    .cont H2 {
+        FONT-WEIGHT: normal; FONT-SIZE: 18px; COLOR: #555; HEIGHT: 35px; TEXT-ALIGN: center
+    }
+    .c2 {
+        HEIGHT: 35px; TEXT-ALIGN: center
+    }
+    .c2 A {
+        DISPLAY: inline-block; FONT-SIZE: 14px; MARGIN: 0px 4px; COLOR: #626262; PADDING-TOP: 1px; HEIGHT: 23px; TEXT-ALIGN: left; TEXT-DECORATION: none
+    }
+    .c2 A:hover {
+        COLOR: #626262; TEXT-DECORATION: none
+    }
+    .c2 A.home {
+        PADDING-LEFT: 30px; BACKGROUND: url(/static/dist/error_img/02.png); WIDTH: 66px
+    }
+    .c2 A.home:hover {
+        BACKGROUND: url(/static/dist/error_img/02.png) 0px -24px
+    }
+    .c2 A.home:active {
+        BACKGROUND: url(/static/dist/error_img/02.png) 0px -48px
+    }
+    </STYLE>
+    <META content="MSHTML 6.00.2900.5969" name=GENERATOR>
+</HEAD>
+<BODY>
+    <DIV class=bg>
+        <DIV class=cont>
+            <DIV class=c1>
+                <IMG class=img1 src="/static/dist/error_img/06.png">
+            </DIV>
+            <H2>你访问的页面不存在</H2>
+            <DIV class=c2>
+                <A class=home href="{% url 'asset_list' %}">返回首页</A>
+            </DIV>
+        </DIV>
+    </DIV>
+</BODY>
+<HTML>

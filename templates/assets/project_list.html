@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block header-css %}
+    <link rel="stylesheet" type="text/css" href="/static/plugins/datatables/dataTables.bootstrap.css"/>
+{% endblock %}
+
+{% block page-content-title %}
+    <div class="asset_list_title">项目列表</div>
+{% endblock %}
+
+{% block page-nav-tab %}
+    <ol class="breadcrumb">
+        <li class="active">资产管理</li>
+        <li class="active">项目列表</li>
+    </ol>
+{% endblock %}
+
+
+{% block page-content %}
+
+    <div>
+        <div class="asset_btn_" style="float: left">
+            <input type="button" id="project_create" class="btn btn-info"  value="新 建">
+            <input type="button" id="project_update" class="btn btn-primary" data-toggle="modal"value="编 辑">
+            <input type="button" id="project_delete" class="btn btn-danger" value="删 除">
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+
+     <!--create模态框-->
+    <form id="create_form" action="{% url 'project_create' %}" method="post">
+    {% csrf_token %}
+    <div id="myModal_create" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content model_top">
+          <div class="modal-header asset_mod_header">
+            <button type="button" class="model_close" data-dismiss="modal"><span aria-hidden="true">关闭</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">创建信息</h4>
+              </div>
+                  <div class="modal-body">
+                  <!--内容-->
+                    <div class="col-md-12">
+                        <p><label>项目名称</label>{{ obj_create.project_name }}</p>
+                        <p><label>备注</label>{{ obj_create.memo }}</p>
+                    </div>
+                  <!--内容-->
+                </div>
+            <div style="clear: both"></div>
+           <div class="modal-footer">
+            <button type="submit" class="btn btn-primary save_btn">创  建</button>
+           </div>
+        </div>
+      </div>
+    </div>
+    </form>
+    <!--end-->
+
+       <!--编辑模态框-->
+    <form id="amend_form" action="{% url 'project_compile' %}" method="post">
+        {% csrf_token %}
+        <div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content model_top">
+              <div class="modal-header asset_mod_header">
+                <button type="button" class="model_close" data-dismiss="modal"><span aria-hidden="true">关闭</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">编辑信息</h4>
+                </div>
+                  <div class="modal-body">
+                    <!--内容-->
+                    <div class="col-md-12">
+                        <p><label>项目ID</label>{{ obj_update.project_id }}</p>
+                        <p><label>项目名称</label>{{ obj_update.project_name }}</p>
+                        <p><label>备注</label>{{ obj_update.memo }}</p>
+                    </div>
+                    <!--内容-->
+                </div>
+                <div style="clear: both"></div>
+              <div class="modal-footer">
+    {#            <button type="button" class="btn btn-default" data-dismiss="modal">关 闭</button>#}
+                <button type="submit" id = 'amend_submit' class="btn btn-primary save_btn">保 存</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </form>
+    <!--end-->
+
+    <div class="panel">
+        <div class="panel-body" >
+            <table id="project_list" class="display table  table-hover" >
+              <thead style="white-space: nowrap;" >
+                    <tr class="table_th_color">
+                        <th></th>
+                        <th>#</th>
+                        <th class="display_n">项目ID</th>
+                        <th>项目名</th>
+                        <th>备注</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block bottom-js %}
+<script type="text/javascript" src="/static/plugins/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/static/plugins/datatables/dataTables.bootstrap.js"></script>
+<script src="/static/js/csrf.js"></script>
+<script src="/static/js/asset_table.js"></script>
+<script src="/static/js/bootbox.min.js"></script>
+<script src="/static/js/jquery.form.js"></script>
+
+<script type="text/javascript">
+ $(function () {
+        $.project_table(".content-wrapper");
+    })
+</script>
+{% endblock %}

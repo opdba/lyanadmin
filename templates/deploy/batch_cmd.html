@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block header-css %}
+    <link rel="stylesheet" type="text/css" href="/static/css/salt.css"/>
+{% endblock %}
+
+
+{% block page-content-title %}
+
+    <div class="asset_list_title">命令执行</div>
+
+{% endblock %}
+
+{% block page-nav-tab %}
+    <ol class="breadcrumb">
+        <li class="active">配置管理</li>
+        <li>命令执行</li>
+    </ol>
+{% endblock %}
+
+
+{% block page-content %}
+<div class="row">
+    <div class="col-md-12">
+         <div class="panel panel-default">
+              <div class="panel-body">
+                 <form id="cmd_form" class="form-horizontal form-border" method="post"  enctype="multipart/form-data" onSubmit="return myCheck()" action="{% url 'batch_cmd' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">目标主机</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="支持多个主机,支持分组" name="tgt" value={{ tgt }}>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">远程命令</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="命令" name="arg" value={{ arg }}>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                         <div class="col-sm-9">
+                              <button id="myButton" type="submit"  class="cmd_btn pull-right" data-toggle="modal">执行</button>
+                         </div>
+
+                        <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" style="display: none;">
+                            <div class="modal-dialog modal-sm" style="padding-top: 200px;">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close hint_close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                  <h4 class="modal-title" id="mySmallModalLabel">提示</h4>
+                                </div>
+                                <div class="modal-body">
+                                  目标主机和命令不能为空
+                                </div>
+
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-default hint_close" data-dismiss="modal">Close</button>
+                                    </div>
+                              </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                          </div>
+                    </div>
+                 </form>
+              </div>
+         </div>
+    <div>
+        {% for ret in result %}
+            {% for key,value in ret.items %}
+                <p class="alert host_color">主机名: {{ key }} </p>
+                <pre class="alert alert-block">
+                    {{ value }}
+                </pre>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block bottom-js %}
+    <script>
+        $(document).ready( function () {
+            $('.hint_close').click(function(){
+                $('#myModal').removeClass('in');
+                $('#myModal').css('display','none');
+            })
+        });
+
+       function myCheck(){
+             if ($("input[name='tgt']").val() == "" ||  $("input[name='arg']").val() == "") {
+                 $('#myModal').addClass('in');
+                 $('#myModal').css('display','block');
+                 //$('#myButton').attr('data-target','#myModal');
+                 return false
+                }
+             else {
+                 //$('#cmd_form').submit(function() {
+                    var $btn = $('#myButton').val('loading');
+                    $btn.addClass('forbid_button');
+                    $btn.text('loading');
+                    $btn.css('cursor', 'not-allowed');
+                    $btn.attr('disabled', 'disabled');
+
+                //});
+             }
+        }
+    </script>
+
+{% endblock %}

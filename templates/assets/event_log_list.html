@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block header-css %}
+{#<link rel="stylesheet" type="text/css" href="/static/plugins/DataTables/datatables.min.css"/>#}
+    <link rel="stylesheet" type="text/css" href="/static/plugins/datatables/dataTables.bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/melon.css"/>
+{% endblock %}
+
+{% block page-content-title %}
+    <div class="asset_list_title">资产变更记录</div>
+{% endblock %}
+
+{% block page-nav-tab %}
+    <ol class="breadcrumb">
+        <li class="active">审计</li>
+        <li>资产变更记录</li>
+    </ol>
+{% endblock %}
+
+{% block page-content %}
+    <div class="panel-body" >
+    <table id="event_log_list" class="display table  table-hover">
+        <thead style="white-space: nowrap;">
+            <tr class="table_th_color">
+                <th>事件ID</th>
+                <th>事件类型</th>
+                <th>名称</th>
+                <th>涉及对象</th>
+                <th>详情</th>
+                <th>事件触发用户</th>
+                <th>日期</th>
+            </tr>
+        </thead>
+    </table>
+    </div>
+{% endblock %}
+
+{% block bottom-js %}
+<script type="text/javascript" src="/static/plugins/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/static/plugins/datatables/dataTables.bootstrap.js"></script>
+<script src="/static/js/asset_table.js"></script>
+<script src="/static/js/csrf.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $.log_table(".content-wrapper");
+    });
+</script>
+{% endblock %}

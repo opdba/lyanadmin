@@ -1,0 +1,32 @@
+.host_color{
+    background-color: #3C8DBC;
+    color: white;
+}
+.result_back{
+    background-color: #333;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background: rgba(0,0,0,.5)!important;
+
+}
+
+.cmd_btn{
+    background-color: #3c8dbc;
+    color: #FFF;
+    width: 200px;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 14px;
+    cursor:pointer;
+}
+
+.forbid_button{
+    background-color: #879098;
+    outline:none
+}
+.sys_form_btn{
+    height: 42px;
+    width: 88px;
+}

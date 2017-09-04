@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+
+{% block header-css %}
+    <link rel="stylesheet" type="text/css" href="/static/plugins/datatables/dataTables.bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/melon.css"/>
+{% endblock %}
+
+{% block page-content-title %}
+    <div class="asset_list_title">待批准资产</div>
+{% endblock %}
+
+{% block page-nav-tab %}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<ol class="breadcrumb">
+    <li class="active">资产管理</li>
+    <li class="active">待批准资产</li>
+</ol>
+{% endblock %}
+
+
+{% block page-content %}
+<div class="panel">
+        <div class="panel-body" >
+            <table id="asset_list" class="display table  table-hover" >
+              <thead style="white-space: nowrap;" >
+                    <tr class="table_th_color">
+                        <th></th>
+                        <th>#</th>
+                        <th>SN</th>
+                        <th>资产类型</th>
+                        <th>厂商</th>
+                        <th>型号</th>
+                        <th>CPU型号</th>
+                        <th>CPU颗数</th>
+                        <th>CPU核数</th>
+                        <th>内存大小</th>
+                        <th>汇报日期</th>
+                    </tr>
+                </thead>
+            </table>
+            <a class="a_sub"><span>提交</span></a>
+{#            <input class="btn" type="button" value="提交" href="www.baidi.com">#}
+
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block bottom-js %}
+<script type="text/javascript" src="/static/plugins/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/static/plugins/datatables/dataTables.bootstrap.js"></script>
+<script src="/static/js/csrf.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready( function () {
+        $("#asset_list").dataTable({
+            paging: true,//分页
+            pagingType: "full_numbers",//分页样式的类型
+            scrollX: true,
+            stateSave: true,
+            searching: true,//搜索
+            pageLength: 10,//首次加载的数据条数
+            ordering: false,//排序操作在服务端进行，所以可以关了。
+            ajax: {//类似jquery的ajax参数，基本都可以用。
+                type: "post",//后台指定了方式，默认get，外加datatable默认构造的参数很长，有可能超过get的最大长度。
+                url: "{% url 'get_new_assets_approval' %}",
+                dataSrc: "data",//默认data，也可以写其他的，格式化table的时候取里面的数据
+                data: function (d) {//d 是原始的发送给服务器的数据，默认很长。
+                    var param = {};//因为服务端排序，可以新建一个参数对象
+                    param.start = d.start;//开始的序号
+                    param.length = d.length;//要取的数据的
+                    var formData = $("#filter_form").serializeArray();//把form里面的数据序列化成数组
+                    formData.forEach(function (e) {
+                        param[e.name] = e.value;
+                    });
+                    return param;//自定义需要传递的参数。
+                }
+            },
+            columns: [//对应上面thead里面的序列
+                { "data": "id" },
+                { "data": "choice" },
+                { "data": "sn" },
+                { "data": "asset_type" },
+                { "data": "manufactory" },
+                { "data": "model" },
+                { "data": "cpu_model" },
+                { "data": "cpu_core_count" },
+                { "data": "cpu_count" },
+                { "data": "ram_size" },
+                { "data": "date" }
+            ],
+
+            "columnDefs": [
+                {
+                    "targets":[0] ,
+                    "render": function ( data, type, full, meta ) {
+                        return '<a class="hide">'+ data +'</a>';
+                    }
+                },
+                {
+                    "targets":[1] ,
+                    "render": function ( data, type, full, meta ) {
+                        return "<input type='checkbox''/>";
+                    }
+                }
+            ],
+
+            language: {
+                 lengthMenu: '<select class="form-control input-xsmall">' + '<option value="5">5</option>' + '<option value="10">10</option>' + '<option value="20">20</option>' + '<option value="30">30</option>' + '<option value="40">40</option>' + '<option value="50">50</option>' + '</select>条记录',//左上角的分页大小显示。
+                 search: '<span class="">搜索：</span>', //右上角的搜索文本，可以写html标签
+                 processing: "载入中", //处理页面数据的时候的显示
+                 paginate: { //分页的样式文本内容。
+                     previous: "上一页",
+                     next: "下一页",
+                     first: "第一页",
+                     last: "最后一页"
+                },
+                zeroRecords: "没有内容",//table tbody内容为空时，tbody的内容。
+                //下面三者构成了总体的左下角的内容。
+                info: "总共_PAGES_ 页，显示第_START_ 到第 _END_",//左下角的信息显示，大写的词为关键字。
+                infoEmpty: "0条记录",//筛选为空时左下角的显示。
+                infoFiltered: "筛选之后得到 _TOTAL_ 条，初始_MAX_ 条"//筛选之后的左下角筛选提示(另一个是分页信息显示，在上面的info中已经设置，所以可以不显示)，
+            }
+        });
+
+        //$("#table_server_filter input[type=search]").css({ width: "auto" });//右上角的默认搜索文本框，不写这个就超出去了。
+
+
+    $(".panel-body .a_sub").click(function(){
+        ids_str = "";
+        $('.panel-body').find(':checkbox').each(function(){
+            var isChecked = $(this).prop("checked");
+            if (isChecked == true){
+                var new_ids = $(this).parent().prev().children().text();
+                ids_str = ids_str+new_ids+',';
+{#                new_ids =  $(this).parent().prev().children().text();#}
+{#                ids_li.push(new_ids)#}
+            }
+        });
+        if (ids_str =="" )
+            alert("请选择要批准的资产");
+        else {
+            $(".panel-body .a_sub").attr("href","{% url 'assets_approval' %}"+"?ids="+ids_str);
+
+        }
+
+{#        $.ajax({#}
+{#                url: "{% url 'assets_approval' %}",#}
+{#                data: {'ids_li': JSON.stringify(ids_li)},#}
+{#                type: 'GET',#}
+{#                success: function(arg){#}
+{#                    // 当请求执行完成之后，自动调用#}
+{#                    // arg:服务器返回的数据#}
+{#                    console.log(arg);#}
+{#                },#}
+{#                error: function(){#}
+{#                    // 当请求错误之后，自动调用#}
+{#                }#}
+{##}
+{#        });#}
+    })
+ });
+
+</script>
+{% endblock %}
