@@ -21,7 +21,7 @@ def acc_login(request):
 
 def log_out(request):
     auth.logout(request)
-    return redirect("/login/")
+    return redirect("/users/login/")
 
 
 def home_page(request):
