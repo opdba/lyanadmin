@@ -206,7 +206,6 @@
                     { "data": "application" },
                     { "data": "module" },
                     { "data": "status" },
-                    { "data": "linkman" },
                     { "data": "memo" },
                     { "data": "admin" },
                     { "data": "details" }
@@ -362,11 +361,11 @@
                     jsonp: 'callback',
                     jsonpCallback: 'list',
                     success: function(arg){
-                        // console.log(arg);   //arg,服务器返回的数据
+                        console.log(arg);   //arg,服务器返回的数据
                         fun()
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown){
-                        // console.log(XMLHttpRequest, textStatus, errorThrown);
+                        console.log(XMLHttpRequest, textStatus, errorThrown);
                         window.location.href="/asset/error/";
                         // 当请求错误之后，自动调用
                     }

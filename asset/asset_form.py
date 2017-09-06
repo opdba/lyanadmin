@@ -62,9 +62,6 @@ class AssetForm(forms.Form):
         data_tuple = models.IDC.objects.all().values_list('id', 'name')
         self.fields['idc_type'].widget.choices = data_tuple
 
-        data_tuple1 = models.Linkman.objects.all().values_list('id', 'name')
-        self.fields['linkman_type'].widget.choices = data_tuple1
-
         data_tuple1 = models.Projectname.objects.all().values_list('id', 'name')
         self.fields['projectname'].widget.choices = data_tuple1
 
@@ -129,9 +126,6 @@ class AssetForm_create(forms.Form):
         super(AssetForm_create, self).__init__(*args, **kwargs)
         data_tuple = models.IDC.objects.all().values_list('id', 'name')
         self.fields['idc_type'].widget.choices = data_tuple
-
-        data_tuple1 = models.Linkman.objects.all().values_list('id', 'name')
-        self.fields['linkman_type'].widget.choices = data_tuple1
 
         data_tuple1 = models.Projectname.objects.all().values_list('id', 'name')
         self.fields['projectname'].widget.choices = data_tuple1

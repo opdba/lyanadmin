@@ -135,7 +135,7 @@ class Permission(models.Model):
     url = models.CharField('URL名称', max_length=255)
     chioces = ((1, 'GET'), (2, 'POST'))
     per_method = models.SmallIntegerField('请求方法', choices=chioces, default=1)
-    argument_list = models.CharField('参数列表', max_length=255, help_text='多个参数之间用英文半角逗号隔开', blank=True, null=True)
+    argument_list = models.CharField('参数列表', max_length=255, help_text='多个参数之间用英文半角逗号隔开', blank=True)
     describe = models.CharField('描述', max_length=255)
 
     def __str__(self):
