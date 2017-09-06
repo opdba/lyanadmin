@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header-css %}
-{#<link rel="stylesheet" type="text/css" href="/static/plugins/DataTables/datatables.min.css"/>#}
+    {#<link rel="stylesheet" type="text/css" href="/static/plugins/DataTables/datatables.min.css"/>#}
     <link rel="stylesheet" type="text/css" href="/static/plugins/datatables/dataTables.bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="/static/bootstrap-select/dist/css/bootstrap-select.min.css"/>
 {% endblock %}
@@ -24,143 +24,161 @@
 
 
 {% block page-content %}
-{#    内容#}
-    <div >
+    {#    内容#}
+    <div>
         <div class="asset_btn_" style="float: left">
-            <input type="button" id="asset_create" class="btn btn-info"  value="新 建">
-            <input type="button" id="asset_update" class="btn btn-primary" data-toggle="modal"value="编 辑">
+            <input type="button" id="asset_create" class="btn btn-info" value="新 建">
+            <input type="button" id="asset_update" class="btn btn-primary" data-toggle="modal" value="编 辑">
             <input type="button" id="asset_delete" class="btn btn-danger" value="删 除">
         </div>
-    <!--显示隐藏列-->
+        <!--显示隐藏列-->
         <div class="dropdown show_hide_check" style="float: left;margin-left: 5px">
-          <button id="dLabel" type="button" class="btn btn-info" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            显示/隐藏列
-           <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" id="show_hide" role="menu" aria-labelledby="dLabel" style="list-style: none">
-              <li role="presentation" class="toggle-vis" data-column="3"><input type="checkbox"><span>SN</span></li>
-              <li role="presentation" class="toggle-vis" data-column="4"><input type="checkbox" checked="checked"><span>序列号</span></li>
-              <li role="presentation" class="toggle-vis" data-column="5"><input type="checkbox" checked="checked"><span>设备类型</span></li>
-              <li role="presentation" class="toggle-vis" data-column="6"><input type="checkbox" checked="checked"><span>IP地址</span></li>
-              <li role="presentation" class="toggle-vis" data-column="7"><input type="checkbox" checked="checked"><span>IDC机房</span></li>
-              <li role="presentation" class="toggle-vis" data-column="8"><input type="checkbox" checked="checked"><span>机柜编号</span></li>
-              <li role="presentation" class="toggle-vis" data-column="9"><input type="checkbox"><span>项目</span></li>
-              <li role="presentation" class="toggle-vis" data-column="10"><input type="checkbox" checked="checked"><span>业务</span></li>
-              <li role="presentation" class="toggle-vis" data-column="11"><input type="checkbox" checked="checked"><span>模块</span></li>
-              <li role="presentation" class="toggle-vis" data-column="12"><input type="checkbox"><span>使用状态</span></li>
-              <li role="presentation" class="toggle-vis" data-column="14"><input type="checkbox"><span>备注</span></li>
-              <li role="presentation" class="toggle-vis" data-column="15"><input type="checkbox"><span>资产管理员</span></li>
-          </ul>
+            <button id="dLabel" type="button" class="btn btn-info" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                显示/隐藏列
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" id="show_hide" role="menu" aria-labelledby="dLabel" style="list-style: none">
+                <li role="presentation" class="toggle-vis" data-column="3"><input type="checkbox"><span>SN</span></li>
+                <li role="presentation" class="toggle-vis" data-column="4"><input type="checkbox"
+                                                                                  checked="checked"><span>序列号</span>
+                </li>
+                <li role="presentation" class="toggle-vis" data-column="5"><input type="checkbox"
+                                                                                  checked="checked"><span>设备类型</span>
+                </li>
+                <li role="presentation" class="toggle-vis" data-column="6"><input type="checkbox"
+                                                                                  checked="checked"><span>IP地址</span>
+                </li>
+                <li role="presentation" class="toggle-vis" data-column="7"><input type="checkbox"
+                                                                                  checked="checked"><span>IDC机房</span>
+                </li>
+                <li role="presentation" class="toggle-vis" data-column="8"><input type="checkbox"
+                                                                                  checked="checked"><span>机柜编号</span>
+                </li>
+                <li role="presentation" class="toggle-vis" data-column="9"><input type="checkbox"><span>项目</span></li>
+                <li role="presentation" class="toggle-vis" data-column="10"><input type="checkbox"
+                                                                                   checked="checked"><span>业务</span>
+                </li>
+                <li role="presentation" class="toggle-vis" data-column="11"><input type="checkbox"
+                                                                                   checked="checked"><span>模块</span>
+                </li>
+                <li role="presentation" class="toggle-vis" data-column="12"><input type="checkbox"><span>使用状态</span>
+                </li>
+                <li role="presentation" class="toggle-vis" data-column="13"><input type="checkbox"><span>备注</span></li>
+            </ul>
         </div>
         <div style="clear:both;"></div>
-    <!--end-->
+        <!--end-->
 
     </div>
     <!--create模态框-->
     <form id="create_form" action="{% url 'asset_create' %}" method="post">
-    {% csrf_token %}
-    <div id="myModal_create" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content model_top">
-          <div class="modal-header asset_mod_header">
-            <button type="button" class="model_close" data-dismiss="modal"><span aria-hidden="true">关闭</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title">创建信息</h4>
-          </div>
-              <div class="modal-body">
-              <!--内容-->
-                <div class="col-md-6">
-{#                    <p><label>SN号</label>{{ obj_create.sn }}</p>#}
-                    <p><label>序列号</label>{{ obj_create.serial_name }}</p>
-                    <p><label>设备类型</label>{{ obj_create.asset_type }}</p>
-                    <p><label>管理IP</label>{{ obj_create.ip }}</p>
-                    <p><label>机房</label>{{ obj_create.idc_type }}</p>
-                    <p><label>机柜编号</label>{{ obj_create.idc_jg }}</p>
-                    <p><label>项目</label>{{ obj_create.projectname }}</p>
-                    <p><label>业务</label>{{ obj_create.application }}</p>
+        {% csrf_token %}
+        <div id="myModal_create" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+             data-backdrop="static" data-keyboard="false" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content model_top">
+                    <div class="modal-header asset_mod_header">
+                        <button type="button" class="model_close" data-dismiss="modal"><span
+                                aria-hidden="true">关闭</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">创建信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <!--内容-->
+                        <div class="col-md-6">
+                            {#                    <p><label>SN号</label>{{ obj_create.sn }}</p>#}
+                            <p><label>序列号</label>{{ obj_create.serial_name }}</p>
+                            <p><label>设备类型</label>{{ obj_create.asset_type }}</p>
+                            <p><label>管理IP</label>{{ obj_create.ip }}</p>
+                            <p><label>机房</label>{{ obj_create.idc_type }}</p>
+                            <p><label>机柜编号</label>{{ obj_create.idc_jg }}</p>
+                            <p><label>项目</label>{{ obj_create.projectname }}</p>
+                            <p><label>业务</label>{{ obj_create.application }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><label>模块</label>{{ obj_create.module }}</p>
+                            <p><label>状态</label>{{ obj_create.status }}</p>
+                            <p><label>备注</label>{{ obj_create.memo }}</p>
+                        </div>
+                        <!--内容-->
+                    </div>
+                    <div style="clear: both"></div>
+                    <div class="modal-footer">
+                        {#            <button type="button" class="btn btn-default" data-dismiss="modal">关 闭</button>#}
+                        <button type="submit" class="btn btn-primary save_btn">创 建</button>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <p><label>模块</label>{{ obj_create.module }}</p>
-                    <p><label>状态</label>{{ obj_create.status }}</p>
-                    <p><label>备注</label>{{ obj_create.memo }}</p>
-                </div>
-              <!--内容-->
             </div>
-            <div style="clear: both"></div>
-           <div class="modal-footer">
-{#            <button type="button" class="btn btn-default" data-dismiss="modal">关 闭</button>#}
-            <button type="submit" class="btn btn-primary save_btn">创  建</button>
-           </div>
         </div>
-      </div>
-    </div>
     </form>
     <!--end-->
 
     <!--编辑模态框-->
     <form id="amend_form" action="{% url 'asset_compile' %}" method="post">
         {% csrf_token %}
-        <div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content model_top">
-              <div class="modal-header asset_mod_header">
-                <button type="button" class="model_close" data-dismiss="modal"><span aria-hidden="true">关闭</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">编辑信息</h4>
-              </div>
-                  <div class="modal-body">
-                  <!--内容-->
-                    <div class="col-md-6">
-{#                        <p><label>SN号</label>{{ obj.sn }}</p>#}
-                        <p><label>序列号</label>{{ obj.serial_name }}</p>
-                        <p><label>设备类型</label>{{ obj.asset_type }}</p>
-                        <p><label>管理IP</label>{{ obj.ip }}</p>
-                        <p><label>机房</label>{{ obj.idc_type }}</p>
-                        <p><label>机柜编号</label>{{ obj.idc_jg }}</p>
-                        <p><label>项目</label>{{ obj.projectname }}</p>
-                        <p><label>业务</label>{{ obj.application }}</p>
+        <div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" data-backdrop="static"
+             data-keyboard="false" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content model_top">
+                    <div class="modal-header asset_mod_header">
+                        <button type="button" class="model_close" data-dismiss="modal"><span
+                                aria-hidden="true">关闭</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">编辑信息</h4>
                     </div>
-                    <div class="col-md-6">
-                        <p><label>模块</label>{{ obj.module }}</p>
-                        <p><label>状态</label>{{ obj.status }}</p>
-                        <p><label>备注</label>{{ obj.memo }}</p>
+                    <div class="modal-body">
+                        <!--内容-->
+                        <div class="col-md-6">
+                            {#                        <p><label>SN号</label>{{ obj.sn }}</p>#}
+                            <p><label>序列号</label>{{ obj.serial_name }}</p>
+                            <p><label>设备类型</label>{{ obj.asset_type }}</p>
+                            <p><label>管理IP</label>{{ obj.ip }}</p>
+                            <p><label>机房</label>{{ obj.idc_type }}</p>
+                            <p><label>机柜编号</label>{{ obj.idc_jg }}</p>
+                            <p><label>项目</label>{{ obj.projectname }}</p>
+                            <p><label>业务</label>{{ obj.application }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><label>模块</label>{{ obj.module }}</p>
+                            <p><label>状态</label>{{ obj.status }}</p>
+                            <p><label>备注</label>{{ obj.memo }}</p>
+                        </div>
+                        <!--内容-->
                     </div>
-                  <!--内容-->
+                    <div style="clear: both"></div>
+                    <div class="modal-footer">
+                        {#            <button type="button" class="btn btn-default" data-dismiss="modal">关 闭</button>#}
+                        <button type="submit" id='amend_submit' class="btn btn-primary save_btn">保 存</button>
+                    </div>
                 </div>
-                <div style="clear: both"></div>
-              <div class="modal-footer">
-    {#            <button type="button" class="btn btn-default" data-dismiss="modal">关 闭</button>#}
-                <button type="submit" id = 'amend_submit' class="btn btn-primary save_btn">保 存</button>
-              </div>
             </div>
-          </div>
         </div>
     </form>
     <!--end-->
 
     <div class="panel">
-{#        <div class="panel-heading">#}
-{#            <h3 class="panel-title">所有资产</h3>#}
-{#        </div>#}
-        <div class="panel-body" >
+        {#        <div class="panel-heading">#}
+        {#            <h3 class="panel-title">所有资产</h3>#}
+        {#        </div>#}
+        <div class="panel-body">
             <table id="asset_list" class="display table  table-hover">
                 <thead style="white-space: nowrap;">
-                    <tr class="table_th_color">
-                        <th></th>
-                        <th></th>
-                        <th class="display_n">资产ID</th>
-                        <th>SN</th>
-                        <th>序列号</th>
-                        <th>设备类型</th>
-                        <th>管理IP</th>
-                        <th>IDC机房</th>
-                        <th>机柜编号</th>
-                        <th>项目</th>
-                        <th>业务</th>
-                        <th>模块</th>
-                        <th>使用状态</th>
-                        <th>备注</th>
-                        <th>资产管理员</th>
-                        <th>详情</th>
-                    </tr>
+                <tr class="table_th_color">
+                    <th></th>
+                    <th></th>
+                    <th class="display_n">资产ID</th>
+                    <th>SN</th>
+                    <th>序列号</th>
+                    <th>设备类型</th>
+                    <th>管理IP</th>
+                    <th>IDC机房</th>
+                    <th>机柜编号</th>
+                    <th>项目</th>
+                    <th>业务</th>
+                    <th>模块</th>
+                    <th>使用状态</th>
+                    <th>备注</th>
+                    <th>详情</th>
+                </tr>
                 </thead>
             </table>
         </div>
@@ -169,18 +187,18 @@
 {% endblock %}
 
 {% block bottom-js %}
-<script type="text/javascript" src="/static/plugins/datatables/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="/static/plugins/datatables/dataTables.bootstrap.js"></script>
-<script src="/static/js/csrf.js"></script>
-<script src="/static/js/asset_table.js"></script>
-<script src="/static/js/bootbox.min.js"></script>
-<script src="/static/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-<script src="/static/js/jquery.form.js"></script>
+    <script type="text/javascript" src="/static/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/static/plugins/datatables/dataTables.bootstrap.js"></script>
+    <script src="/static/js/csrf.js"></script>
+    <script src="/static/js/asset_table.js"></script>
+    <script src="/static/js/bootbox.min.js"></script>
+    <script src="/static/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <script src="/static/js/jquery.form.js"></script>
 
-<script>
-    $(function () {
-        $.da_table(".content-wrapper");
-    })
-</script>
+    <script>
+        $(function () {
+            $.da_table(".content-wrapper");
+        })
+    </script>
 
 {% endblock %}
