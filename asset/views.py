@@ -146,14 +146,6 @@ def asset_delete(request):
     return HttpResponse("list(" + json.dumps({"seccess": "seccess"}) + ")")
 
 
-
-@login_required
-def get_asset_linkman(request):
-    linkman_dic = asset_handle.fetch_asset_linkman()
-    print(linkman_dic)
-    return HttpResponse(json.dumps(linkman_dic))
-
-
 @login_required
 def error_403(request):
     return render(request, 'assets/403.html')

@@ -17,7 +17,6 @@ urlpatterns = [
     url(r'^asset_compile/$', views.asset_compile, name="asset_compile"),
     url(r'^asset_create/$', views.asset_create, name="asset_create"),
     url(r'^asset_delete/$', views.asset_delete, name="asset_delete"),
-    url(r'^get_asset_linkman/$', views.get_asset_linkman, name="get_asset_linkman"),
     url(r'^error/$', views.error_403, name="error_403"),
     url(r'^error2/$', views.error_404, name="error_404"),
     url(r'^btn_create/$', views.btn_create, name="btn_create"),
