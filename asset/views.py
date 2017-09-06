@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # -*-coding:utf-8 -*-
-from django.shortcuts import render, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, HttpResponse, HttpResponseRedirect, redirect
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 from asset import core, asset_handle
@@ -35,7 +35,7 @@ def asset_report(request):
 
 @login_required
 def index(request):
-    return render(request, "index.html")
+    return redirect("/asset/asset_list/")
 
 
 # 资产列表

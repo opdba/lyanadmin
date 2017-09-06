@@ -24,6 +24,5 @@ urlpatterns = [
     url(r'^users/', include("users.urls")),
     url(r'^asset/', include("asset.urls")),
     url(r'^deploy/', include("deploy.urls")),
-    url(r'^os_install/', include("os_install.urls")),
-url(r'^test/$', views.test,name="test"),
+    url(r'^test/$', views.test, name="test"),
 ]

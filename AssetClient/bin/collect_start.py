@@ -11,7 +11,7 @@ else:
     print(BASE_DIR)
 
 sys.path.append((BASE_DIR))
-from core import argvhandler
+from ..core import argvhandler
 
 if __name__ == '__main__':
 
