@@ -483,6 +483,7 @@
                     {"data": "name"},
                     {"data": "component"},
                     {"data": "detail"},
+                    {"data":"user"},
                     {"data": "date"}
                 ],
                 "columnDefs": [
