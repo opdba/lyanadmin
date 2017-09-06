@@ -89,52 +89,6 @@ def asset_event_logs(request):
 
 
 @login_required
-def get_new_assets_approval(request):
-    '''获取待批准资产'''
-    print("获取待批准资产")
-    asset_dic = asset_handle.fetch_new_asset_list()
-    print(asset_dic)
-    return HttpResponse(json.dumps(asset_dic))
-
-
-@login_required
-def new_assets_approval(request):
-    '''显示待批准资产'''
-    return render(request, "assets/new_assets_approval.html")
-
-
-@login_required
-def assets_approval(request):
-    '''批准新资产'''
-    if request.method == 'POST':
-        request.POST = request.POST.copy()
-        approved_asset_list = request.POST.getlist('approved_asset_list')
-        approved_asset_list = models.NewAssetApprovalZone.objects.filter(id__in=approved_asset_list)
-        response_dic = {}
-        for obj in approved_asset_list:
-            request.POST['asset_data'] = obj.data  # 拿出存放在NewAssetApprovalZone的资产数据放入request.POST
-            ass_handler = core.Asset(request)
-            if ass_handler.data_is_valid_without_id():
-                ass_handler.data_into()
-                obj.approved = True  # 以批准
-                obj.save()
-            response_dic[obj.id] = ass_handler.response
-            print("-----", response_dic)
-            print(approved_asset_list)
-            if not len(ass_handler.response['error']):  # 如果没有错误，更新待批准数据
-                obj.delete()
-        return render(request, 'assets/assets_approval.html',
-                      {'new_assets': approved_asset_list, 'response_dic': response_dic})
-    else:
-        ids_str = request.GET.get('ids')
-        id_list = ids_str.split(",")
-        id_list = id_list[0:-1]
-        print(id_list)
-        new_assets = models.NewAssetApprovalZone.objects.filter(id__in=id_list)
-        return render(request, 'assets/assets_approval.html', {'new_assets': new_assets})
-
-
-@login_required
 @check_permission
 def asset_compile(request):
     '''编辑'''

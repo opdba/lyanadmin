@@ -207,13 +207,12 @@
                     { "data": "module" },
                     { "data": "status" },
                     { "data": "memo" },
-                    { "data": "admin" },
                     { "data": "details" }
                 ],
 
                 "columnDefs": [
                     {
-                        "targets": [ 3,9,12,14,15 ],
+                        "targets": [ 3,9,12,14 ],
                         "visible": false    //隐藏列
                     },
                     {
