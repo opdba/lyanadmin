@@ -322,7 +322,7 @@
                             $("#module").val(choice_data.module);
                             $("#memo").val(choice_data.memo);
 
-                           var pick_li = [choice_data.projectname,choice_data.application,choice_data.linkman,choice_data.asset_type,choice_data.idc_name,choice_data.status];
+                           var pick_li = [choice_data.projectname,choice_data.application,choice_data.asset_type,choice_data.idc_name,choice_data.status];
                            $('#myModal .selectpicker').find("option").each(function () {
                                var op_text = $(this).text();
                                 for (var i = 0; i < pick_li.length; i++) {    //循环op_li列表
@@ -883,63 +883,8 @@
             });
             //end
 
-        },
-        'linkman_table' : function (content) {
-            var t = $(content).find("#linkman_list").DataTable({
-                paging: true,//分页
-                pagingType: "full_numbers",//分页样式的类型
-                scrollX: true,
-                stateSave: true,
-                searching: true,//搜索
-                pageLength: 10,//首次加载的数据条数
-                ordering: false,//排序操作在服务端进行，所以可以关了。
-                ajax: {//类似jquery的ajax参数，基本都可以用。
-                    type: "post",//后台指定了方式，默认get，外加datatable默认构造的参数很长，有可能超过get的最大长度。
-                    url: "/asset/get_asset_linkman/",
-                    dataSrc: "data",//默认data，也可以写其他的，格式化table的时候取里面的数据
-                    data: function (d) {//d 是原始的发送给服务器的数据，默认很长。
-    //                   return param;//自定义需要传递的参数。
-                    }
-                },
-                columns: [//对应上面thead里面的序列
-                    { "data": "id" },
-                    { "data": "choice" },
-                    { "data": "department" },
-                    { "data": "name" },
-                    { "data": "fixed_phone" },
-                    { "data": "phone" },
-                    { "data": "email" },
-                    { "data": "qq" },
-                    { "data": "memo" },
-                ],
-
-                "columnDefs": [
-                    {
-                        "targets":[1] ,
-                        "render": function ( data, type, full, meta ) {
-                            return "<input type='checkbox''/>";
-                        }
-                    }
-                ],
-
-                language: {
-                     lengthMenu: '<select class="form-control input-xsmall">' + '<option value="5">5</option>' + '<option value="10">10</option>' + '<option value="20">20</option>' + '<option value="30">30</option>' + '<option value="40">40</option>' + '<option value="50">50</option>' + '</select>条记录',//左上角的分页大小显示。
-                     search: '<span class="">搜索：</span>', //右上角的搜索文本，可以写html标签
-                     processing: "载入中", //处理页面数据的时候的显示
-                     paginate: { //分页的样式文本内容。
-                         previous: "上一页",
-                         next: "下一页",
-                         first: "第一页",
-                         last: "最后一页"
-                    },
-                    zeroRecords: "没有这条记录",//table tbody内容为空时，tbody的内容。
-                    //下面三者构成了总体的左下角的内容。
-                    info: "总共_PAGES_ 页，显示第_START_ 到第 _END_",//左下角的信息显示，大写的词为关键字。
-                    infoEmpty: "0条记录",//筛选为空时左下角的显示。
-                    infoFiltered: "筛选之后得到 _TOTAL_ 条，初始_MAX_ 条"//筛选之后的左下角筛选提示(另一个是分页信息显示，在上面的info中已经设置，所以可以不显示)，
-                }
-            })
         }
+
     });
 
 })(jQuery);

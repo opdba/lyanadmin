@@ -161,8 +161,10 @@ def asset_compile(request):
 def asset_create(request):
     '''新建'''
     request_obj = request.POST
+
     try:
         user_input_obj = asset_form.AssetForm_create(request_obj)
+        print user_input_obj
         if user_input_obj.is_valid():  # 验证用户输入是否合法
             # data = user_input_obj.clean()  # 合法，获取数据
             obj = asset_handle.LogicalProcess(request_obj)
@@ -189,10 +191,6 @@ def asset_delete(request):
         return HttpResponse(e)
     return HttpResponse("list(" + json.dumps({"seccess": "seccess"}) + ")")
 
-
-@login_required
-def asset_linkman(request):
-    return render(request, 'assets/asset_linkman.html')
 
 
 @login_required
