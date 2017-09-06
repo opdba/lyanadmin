@@ -130,6 +130,75 @@ class EventLog(models.Model):
         verbose_name_plural = "事件纪录"
 
 
+class CPU(models.Model):
+    asset = models.OneToOneField('Asset')
+    cpu_core_count = models.SmallIntegerField(u'cpu核数')
+    memo = models.TextField(u'备注', null=True, blank=True)
+    create_date = models.DateTimeField(auto_now_add=True)
+    update_date = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        verbose_name = 'CPU部件'
+        verbose_name_plural = "CPU部件"
+
+    def __unicode__(self):
+        return self.cpu_core_count
+
+
+class RAM(models.Model):
+    asset = models.ForeignKey('Asset')
+    capacity = models.IntegerField(u'内存大小(MB)')
+    memo = models.CharField(u'备注', max_length=128, blank=True, null=True)
+    create_date = models.DateTimeField(blank=True, auto_now_add=True)
+    update_date = models.DateTimeField(blank=True, null=True)
+
+    def __unicode__(self):
+        return '%s:%s' % (self.asset_id,  self.capacity)
+
+    class Meta:
+        verbose_name = 'RAM'
+        verbose_name_plural = "RAM"
+
+    auto_create_fields = ['sn', 'slot', 'model', 'capacity']
+
+
+class Disk(models.Model):
+    asset = models.ForeignKey('Asset')
+    capacity = models.FloatField(u'磁盘容量GB')
+    disk_iface_choice = (
+        ('SATA', 'SATA'),
+        ('SSD', 'SSD'),
+    )
+    memo = models.TextField(u'备注', blank=True, null=True)
+    create_date = models.DateTimeField(blank=True, auto_now_add=True)
+    update_date = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        verbose_name = '硬盘'
+        verbose_name_plural = "硬盘"
+
+    def __unicode__(self):
+        return '%s: capacity:%s' % (self.asset_id, self.capacity)
+
+
+class NIC(models.Model):
+    asset = models.ForeignKey('Asset')
+    name = models.CharField(u'网卡名', max_length=64, blank=True, null=True)
+    ipaddress = models.GenericIPAddressField(u'IP', blank=True, null=True)
+    memo = models.CharField(u'备注', max_length=128, blank=True, null=True)
+    create_date = models.DateTimeField(blank=True, auto_now_add=True)
+    update_date = models.DateTimeField(blank=True, null=True)
+
+    def __unicode__(self):
+        return '%s:%s' % (self.asset_id, self.macaddress)
+
+    class Meta:
+        verbose_name = u'网卡'
+        verbose_name_plural = u"网卡"
+
+    auto_create_fields = ['name', 'sn', 'model', 'macaddress', 'ipaddress', 'netmask', 'bonding']
+
+
 class Permission(models.Model):
     name = models.CharField("权限名称", max_length=64)
     url = models.CharField('URL名称', max_length=255)
