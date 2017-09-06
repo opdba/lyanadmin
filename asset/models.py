@@ -190,7 +190,7 @@ class NIC(models.Model):
     update_date = models.DateTimeField(blank=True, null=True)
 
     def __unicode__(self):
-        return '%s:%s' % (self.asset_id, self.macaddress)
+        return '%s' % self.name
 
     class Meta:
         verbose_name = u'网卡'
