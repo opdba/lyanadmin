@@ -3,3 +3,4 @@
 *.pyc
 *.sqlite3
 lyanadmin/local_settings.py
+var
