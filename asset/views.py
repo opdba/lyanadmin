@@ -51,7 +51,6 @@ def asset_list(request):
 def get_asset_list(request):
     '''获取资产列表'''
     asset_dic = asset_handle.fetch_asset_list()
-    print(asset_dic)
     return HttpResponse(json.dumps(asset_dic))
 
 
