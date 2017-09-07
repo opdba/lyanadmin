@@ -22,6 +22,7 @@ salt state.sls 配置
 ```
 
 # TODO
+* state.sls
 * LDAP
 * record salt job id
 * find the result by job id
