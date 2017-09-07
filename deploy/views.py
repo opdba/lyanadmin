@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from lyanadmin import settings
-from deploy.api.saltapi2 import SaltAPI
+from deploy.api.saltapihttps import SaltAPI
 from code_pub import Code_Work
 from build_data import BuildData
 import time
@@ -73,7 +73,7 @@ def module_deploy(request):
             print(tgt, arg, tgtcheck)
             if tgtcheck:
                 models.Message.objects.create(type='salt', action='deploy', action_ip=tgt,
-                                              content='saltstack %s 模块部署' % (arg))  # 写入日志
+                                              content='saltstack %s 模块部署' % arg)  # 写入日志
                 sapi = SaltAPI(url=settings.SALT_API['url'], username=settings.SALT_API['user'],
                                password=settings.SALT_API['password'])
                 if 'sysinit' in arg:

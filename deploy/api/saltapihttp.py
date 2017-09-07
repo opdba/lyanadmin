@@ -1,12 +1,14 @@
 ﻿# -*- coding: utf-8 -*-
 
-import urllib2,urllib
+import urllib2, urllib
 import time
 import json
 
+
 class SaltAPI(object):
     __token_id = ''
-    def __init__(self,url,username,password):
+
+    def __init__(self, url, username, password):
         self.__url = url.rstrip('/')
         self.__user = username
         self.__password = password
@@ -16,19 +18,19 @@ class SaltAPI(object):
         params = {'eauth': 'pam', 'username': self.__user, 'password': self.__password}
         encode = urllib.urlencode(params)
         obj = urllib.unquote(encode)
-        content = self.postRequest(obj,prefix='/login')
+        content = self.postRequest(obj, prefix='/login')
         try:
             self.__token_id = content['return'][0]['token']
         except KeyError:
             raise KeyError
 
-    def postRequest(self,obj,prefix='/'):
+    def postRequest(self, obj, prefix='/'):
         url = self.__url + prefix
-        headers = {'X-Auth-Token'   : self.__token_id}
+        headers = {'X-Auth-Token': self.__token_id}
         req = urllib2.Request(url, obj, headers)
-        #print(req)
+        # print(req)
         opener = urllib2.urlopen(req)
-        #print(opener)
+        # print(opener)
         content = json.loads(opener.read())
         return content
 
@@ -39,9 +41,9 @@ class SaltAPI(object):
         content = self.postRequest(obj)
         minions = content['return'][0]['data']['return']['minions']
         minions_pre = content['return'][0]['data']['return']['minions_pre']
-        return minions,minions_pre
+        return minions, minions_pre
 
-    def delete_key(self,node_name):
+    def delete_key(self, node_name):
         params = {'client': 'wheel', 'fun': 'key.delete', 'match': node_name}
         obj = urllib.urlencode(params)
         self.token_id()
@@ -49,7 +51,7 @@ class SaltAPI(object):
         ret = content['return'][0]['data']['success']
         return ret
 
-    def accept_key(self,node_name):
+    def accept_key(self, node_name):
         params = {'client': 'wheel', 'fun': 'key.accept', 'match': node_name}
         obj = urllib.urlencode(params)
         self.token_id()
@@ -57,7 +59,7 @@ class SaltAPI(object):
         ret = content['return'][0]['data']['success']
         return ret
 
-    def remote_noarg_execution(self,tgt,fun):
+    def remote_noarg_execution(self, tgt, fun):
         ''' Execute commands without parameters '''
         params = {'client': 'local', 'tgt': tgt, 'fun': fun}
         obj = urllib.urlencode(params)
@@ -66,7 +68,7 @@ class SaltAPI(object):
         ret = content['return'][0][tgt]
         return ret
 
-    def remote_execution(self,tgt,fun,arg):
+    def remote_execution(self, tgt, fun, arg):
         ''' Command execution with parameters '''
         params = {'client': 'local', 'tgt': tgt, 'fun': fun, 'arg': arg}
         obj = urllib.urlencode(params)
@@ -75,7 +77,7 @@ class SaltAPI(object):
         ret = content['return'][0][tgt]
         return ret
 
-    def target_remote_execution(self,tgt,fun,arg):
+    def target_remote_execution(self, tgt, fun, arg):
         ''' Use targeting for remote execution '''
         params = {'client': 'local', 'tgt': tgt, 'fun': fun, 'arg': arg, 'expr_form': 'nodegroup'}
         obj = urllib.urlencode(params)
@@ -84,7 +86,7 @@ class SaltAPI(object):
         jid = content['return'][0]['jid']
         return jid
 
-    def deploy(self,tgt,arg):
+    def deploy(self, tgt, arg):
         ''' Module deployment '''
         params = {'client': 'local', 'tgt': tgt, 'fun': 'state.sls', 'arg': arg}
         obj = urllib.urlencode(params)
@@ -92,7 +94,7 @@ class SaltAPI(object):
         content = self.postRequest(obj)
         return content
 
-    def async_deploy(self,tgt,arg):
+    def async_deploy(self, tgt, arg):
         ''' Asynchronously send a command to connected minions '''
         params = {'client': 'local_async', 'tgt': tgt, 'fun': 'state.sls', 'arg': arg}
         obj = urllib.urlencode(params)
@@ -101,7 +103,7 @@ class SaltAPI(object):
         jid = content['return'][0]['jid']
         return jid
 
-    def target_deploy(self,tgt,arg):
+    def target_deploy(self, tgt, arg):
         ''' Based on the node group forms deployment '''
         params = {'client': 'local_async', 'tgt': tgt, 'fun': 'state.sls', 'arg': arg, 'expr_form': 'nodegroup'}
         obj = urllib.urlencode(params)
@@ -110,18 +112,16 @@ class SaltAPI(object):
         jid = content['return'][0]['jid']
         return jid
 
+
 def main():
-    sapi = SaltAPI(url="https://192.168.0.109:8888",username="saltapi",password="jh123456")
-    #sapi.token_id()
-    #print sapi.list_all_key()
-    #sapi.delete_key('test-01')
-    #sapi.accept_key('test-01')
-    #sapi.deploy('test-01','nginx')
-    #print sapi.remote_noarg_execution('test-01','grains.items')
+    sapi = SaltAPI(url="https://192.168.0.109:8888", username="saltapi", password="jh123456")
+    sapi.token_id()
+    print sapi.list_all_key()
+    sapi.delete_key('test-01')
+    sapi.accept_key('test-01')
+    sapi.deploy('test-01', 'nginx')
+    print sapi.remote_noarg_execution('test-01', 'grains.items')
+
 
 if __name__ == '__main__':
     main()
-
-
-
-

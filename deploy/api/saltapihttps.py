@@ -1,17 +1,19 @@
 #!/usr/bin/env python
-#coding=utf-8
-import json,re
+# coding=utf-8
+import json, re
 import urllib
 import urllib2
-
 import ssl
+
+
 ssl._create_default_https_context = ssl._create_unverified_context
 
+
 class SaltAPI(object):
-    def __init__(self,url,username,password):
-        self.__url = url    #salt-api监控的地址和端口
-        self.__user = username     #salt-api用户名
-        self.__password = password     #salt-api用户密码
+    def __init__(self, url, username, password):
+        self.__url = url  # salt-api监控的地址和端口
+        self.__user = username  # salt-api用户名
+        self.__password = password  # salt-api用户密码
         self.__token_id = self.salt_login()
 
     def salt_login(self):
@@ -20,16 +22,16 @@ class SaltAPI(object):
         print(params)
         encode = urllib.urlencode(params)
         obj = urllib.unquote(encode)
-        headers = {'X-Auth-Token':''}
+        headers = {'X-Auth-Token': ''}
         url = self.__url + '/login'
-        print("url:",url)
+        print("url:", url)
         req = urllib2.Request(url, obj, headers)
         opener = urllib2.urlopen(req)
         print (opener)
         content = json.loads(opener.read())
         try:
             token = content['return'][0]['token']
-            print("token:",token)
+            print("token:", token)
             return token
         except KeyError:
             raise KeyError
@@ -37,10 +39,10 @@ class SaltAPI(object):
     def postRequest(self, obj, prefix='/'):
         '''发送请求'''
         url = self.__url + prefix
-        headers = {'X-Auth-Token':self.__token_id,}
-        print(url,obj,headers)
+        headers = {'X-Auth-Token': self.__token_id, }
+        print(url, obj, headers)
         req = urllib2.Request(url, obj, headers)
-        #print(req)
+        # print(req)
         opener = urllib2.urlopen(req)
         content = json.loads(opener.read())
         return content
@@ -49,7 +51,7 @@ class SaltAPI(object):
         '''命令执行'''
         print(params)
         obj = urllib.urlencode(params)
-        print("obj",obj,type(obj))
+        print("obj", obj, type(obj))
         obj, number = re.subn("arg\d", 'arg', obj)
         res = self.postRequest(obj)
         return res['return']
@@ -60,12 +62,12 @@ class SaltAPI(object):
         obj = urllib.urlencode(params)
         obj, number = re.subn("arg\d", 'arg', obj)
         content = self.postRequest(obj)
-        #print(content)
+        # print(content)
         minions = content['return'][0]['data']['return']['minions']
         minions_pre = content['return'][0]['data']['return']['minions_pre']
-        return minions,minions_pre
+        return minions, minions_pre
 
-    def accept_key(self,node_name):
+    def accept_key(self, node_name):
         '''接受key'''
         params = {'client': 'wheel', 'fun': 'key.accept', 'match': node_name}
         obj = urllib.urlencode(params)
@@ -73,7 +75,7 @@ class SaltAPI(object):
         ret = content['return'][0]['data']['success']
         return ret
 
-    def delete_key(self,node_name):
+    def delete_key(self, node_name):
         '''删除key'''
         params = {'client': 'wheel', 'fun': 'key.delete', 'match': node_name}
         obj = urllib.urlencode(params)
@@ -81,7 +83,7 @@ class SaltAPI(object):
         ret = content['return'][0]['data']['success']
         return ret
 
-    def async_deploy(self,tgt,arg):
+    def async_deploy(self, tgt, arg):
 
         params = {'client': 'local_async', 'tgt': tgt, 'fun': 'state.sls', 'arg': arg}
         obj = urllib.urlencode(params)
@@ -89,7 +91,7 @@ class SaltAPI(object):
         jid = content['return'][0]['jid']
         return jid
 
-    def target_deploy(self,tgt,arg):
+    def target_deploy(self, tgt, arg):
         ''' 部署模块 '''
         params = {'client': 'local_async', 'tgt': tgt, 'fun': 'state.sls', 'arg': arg, 'expr_form': 'nodegroup'}
         obj = urllib.urlencode(params)
@@ -99,15 +101,16 @@ class SaltAPI(object):
 
 
 def main():
-    sapi = SaltAPI(url='https://192.168.0.104:8888',username='saltapi',password='123456')
-    #params = {'client':'local', 'fun':'test.ping', 'tgt':'某台服务器的key'}
-    params = {'client':'local', 'fun':'test.ping', 'tgt':'*'}
-    #params = {'client':'local', 'fun':'cmd.run', 'tgt':'*','arg1':'ifconfig'}
-    #params = {'client':'local', 'fun':'test.echo', 'tgt':'*', 'arg1':'hello'}
-    #params = {'client':'local', 'fun':'test.ping', 'tgt':'某组服务器的组名', 'expr_form':'nodegroup'}
+    sapi = SaltAPI(url='https://192.168.1.240:8888', username='saltapi', password='saltapi')
+    # params = {'client':'local', 'fun':'test.ping', 'tgt':'某台服务器的key'}
+    params = {'client': 'local', 'fun': 'test.ping', 'tgt': '*'}
+    # params = {'client':'local', 'fun':'cmd.run', 'tgt':'*','arg1':'ifconfig'}
+    # params = {'client':'local', 'fun':'test.echo', 'tgt':'*', 'arg1':'hello'}
+    # params = {'client':'local', 'fun':'test.ping', 'tgt':'某组服务器的组名', 'expr_form':'nodegroup'}
     test = sapi.saltCmd(params)
-    #test = sapi.list_all_key()
+    # test = sapi.list_all_key()
     print (test)
+
 
 if __name__ == '__main__':
     main()
