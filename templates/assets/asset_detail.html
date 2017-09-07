@@ -54,20 +54,13 @@
                     <tr>
                         <td class="col-md-2 bold">内网IP</td>
                         <td class="col-md-4">: {{ asset_obj.management_ip }}</td>
-                        <td class="col-md-4">:
-                            {% for nic in asset_obj.nic_set.select_related %}
-                                {% if nic.macaddress %}
-                                    {{ nic.macaddress }} |
-                                {% endif %}
-                            {% endfor %}
-                        </td>
                     </tr>
                     <tr>
                         <td class="col-md-2 bold">外网IP</td>
                         <td class="col-md-4">:
                             {% for nic in asset_obj.nic_set.select_related %}
                                 {% if nic.ipaddress %}
-                                    {{ nic.ipaddress }} |
+                                    {{ nic.ipaddress }}
                                 {% endif %}
                             {% endfor %}
                         </td>
