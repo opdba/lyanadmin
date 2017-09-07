@@ -25,3 +25,4 @@ salt state.sls 配置
 * LDAP
 * record salt job id
 * find the result by job id
+* file download
