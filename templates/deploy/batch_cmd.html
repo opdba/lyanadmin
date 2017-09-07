@@ -66,11 +66,13 @@
          </div>
     <div>
         {% for ret in result %}
-            {% for key,value in ret.items %}
-                <p class="alert host_color">主机名: {{ key }} </p>
-                <pre class="alert alert-block">
-                    {{ value }}
-                </pre>
+            {% for ret1 in ret %}
+                {% for key,value in ret1.items %}
+                    <p class="alert host_color">主机名: {{ key }} </p>
+                    <pre class="alert alert-block">
+                        {{ value }}
+                    </pre>
+                {% endfor %}
             {% endfor %}
         {% endfor %}
     </div>

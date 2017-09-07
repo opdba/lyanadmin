@@ -13,15 +13,16 @@ from asset import models as asset_models
 def batchcmd(request):
     '''命令执行'''
     if request.method == 'POST':
-        tgt = request.POST.get('tgt')
+        tgtli = request.POST.get('tgt').split(",")
         arg = request.POST.get('arg')
 
         sapi = SaltAPI(url=settings.SALT_API['url'], username=settings.SALT_API['user'],
                        password=settings.SALT_API['password'])
-
-        params = {'client': 'local', 'fun': 'cmd.run', 'tgt': tgt, 'arg': arg}
-        result = sapi.saltCmd(params)
-        print(result)
+        result = []
+        for tgt in tgtli:
+            params = {'client': 'local', 'fun': 'cmd.run', 'tgt': tgt, 'arg': arg}
+            result.append(sapi.saltCmd(params))
+            print(result)
         return render(request, "deploy/batch_cmd.html", {'result': result})
     else:
         return render(request, "deploy/batch_cmd.html")
