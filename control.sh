@@ -5,7 +5,7 @@ cd $WORKSPACE
 
 mkdir -p var
 
-app=pydelo
+app=lyanadmin
 pidfile=var/$app.pid
 logfile=var/$app.log
 if [ X$2==X ]
