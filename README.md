@@ -20,3 +20,8 @@ salt state.sls 配置
     │   └── init.sls
     └── top.sls
 ```
+
+# TODO
+* LDAP
+* record salt job id
+* find the result by job id
