@@ -1,19 +1,23 @@
 #!/bin/bash
 
-WORKSPACE=$(cd $(dirname $0)/; pwd)
-cd $WORKSPACE
+APPNAME=lyanadmin # Name of the application
+DJANGODIR=$(cd $(dirname $0)/; pwd) # Django project directory
+USER=wangchao # the user to run as
+NUM_WORKERS=4 # how many worker processes should Gunicorn spawn
+DJANGO_SETTINGS_MODULE=$APPNAME.settings # which settings file should Django use
+DJANGO_WSGI_MODULE=$APPNAME.wsgi # WSGI module name
 
-mkdir -p var
 
-app=lyanadmin
-pidfile=var/$app.pid
-logfile=var/$app.log
-if [ X$2==X ]
-then
+cd $DJANGODIR
+export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
+export PYTHONPATH=$DJANGODIR:$PYTHONPATH
+VARDIR=$DJANGODIR/var
+
+test -d $VARDIR || mkdir -p $VARDIR
+
+pidfile=var/$APPNAME.pid
+logfile=var/$APPNAME.log
 port=8000
-else
-port=$2
-fi
 
 function check_pid() {
     if [ -f $pidfile ];then
@@ -35,16 +39,25 @@ function start() {
         return 1
     fi
 
-    gunicorn -w 4 -b 127.0.0.1:$port lyanadmin.wsgi:application -D --pid $pidfile --capture-output --error-logfile var/error.log --log-level debug --log-file=$logfile &> $logfile 2>&1
+    exec gunicorn ${DJANGO_WSGI_MODULE}:application \
+    --name $APPNAME \
+    --workers $NUM_WORKERS \
+    --user=$USER \
+    --bind=127.0.0.1:8000 \
+    -D --pid $VARDIR/lyanadmin.pid \
+    --capture-output  \
+    --log-level=debug \
+    --log-file=$VARDIR/lyanadmin.log & 2>&1
     sleep 1
-    echo -n "$app started..., pid="
+    echo -n "$APPNAME started..., pid="
     cat $pidfile
 }
+
 
 function stop() {
     pid=`cat $pidfile`
     kill $pid
-    echo "$app quit..."
+    echo "$APPNAME quit..."
 }
 
 function kill9() {
@@ -99,3 +112,4 @@ elif [ "$1" == "version" ];then
 else
     help
 fi
+

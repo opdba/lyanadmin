@@ -1,0 +1,390 @@
+[2017-09-07 19:53:08 +0000] [6984] [DEBUG] Current configuration:
+  proxy_protocol: False
+  worker_connections: 1000
+  statsd_host: None
+  max_requests_jitter: 0
+  post_fork: <function post_fork at 0x7f560d14eb18>
+  errorlog: /opt/tools/lyanadmin/run/lyanadmin.log
+  enable_stdio_inheritance: False
+  worker_class: sync
+  ssl_version: 2
+  suppress_ragged_eofs: True
+  syslog: False
+  syslog_facility: user
+  when_ready: <function when_ready at 0x7f560d14e848>
+  pre_fork: <function pre_fork at 0x7f560d14e9b0>
+  cert_reqs: 0
+  preload_app: False
+  keepalive: 2
+  accesslog: None
+  group: 1000
+  graceful_timeout: 30
+  do_handshake_on_connect: False
+  spew: False
+  workers: 4
+  proc_name: lyanadmin
+  sendfile: None
+  pidfile: None
+  umask: 0
+  on_reload: <function on_reload at 0x7f560d14e6e0>
+  pre_exec: <function pre_exec at 0x7f560d154140>
+  worker_tmp_dir: None
+  limit_request_fields: 100
+  pythonpath: None
+  on_exit: <function on_exit at 0x7f560d154938>
+  config: None
+  logconfig: None
+  check_config: False
+  statsd_prefix: 
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  reload_engine: auto
+  proxy_allow_ips: ['127.0.0.1']
+  pre_request: <function pre_request at 0x7f560d1542a8>
+  post_request: <function post_request at 0x7f560d154398>
+  forwarded_allow_ips: ['127.0.0.1']
+  worker_int: <function worker_int at 0x7f560d14ede8>
+  raw_paste_global_conf: []
+  threads: 1
+  max_requests: 0
+  chdir: /opt/tools/lyanadmin
+  daemon: False
+  user: 1000
+  limit_request_line: 4094
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  certfile: None
+  on_starting: <function on_starting at 0x7f560d14e578>
+  post_worker_init: <function post_worker_init at 0x7f560d14ec80>
+  child_exit: <function child_exit at 0x7f560d154500>
+  worker_exit: <function worker_exit at 0x7f560d154668>
+  paste: None
+  default_proc_name: lyanadmin.wsgi:application
+  syslog_addr: udp://localhost:514
+  syslog_prefix: None
+  ciphers: TLSv1
+  worker_abort: <function worker_abort at 0x7f560d14ef50>
+  loglevel: debug
+  bind: ['unix:/opt/tools/lyanadmin/run/gunicorn.sock']
+  raw_env: []
+  initgroups: False
+  capture_output: False
+  reload: False
+  limit_request_field_size: 8190
+  nworkers_changed: <function nworkers_changed at 0x7f560d1547d0>
+  timeout: 30
+  keyfile: None
+  ca_certs: None
+  tmp_upload_dir: None
+  backlog: 2048
+  logger_class: gunicorn.glogging.Logger
+[2017-09-07 19:53:08 +0000] [6984] [INFO] Starting gunicorn 19.7.1
+[2017-09-07 19:53:08 +0000] [6984] [DEBUG] Arbiter booted
+[2017-09-07 19:53:08 +0000] [6984] [INFO] Listening at: unix:/opt/tools/lyanadmin/run/gunicorn.sock (6984)
+[2017-09-07 19:53:08 +0000] [6984] [INFO] Using worker: sync
+[2017-09-07 19:53:08 +0000] [6992] [INFO] Booting worker with pid: 6992
+[2017-09-07 19:53:08 +0000] [6995] [INFO] Booting worker with pid: 6995
+[2017-09-07 19:53:08 +0000] [6998] [INFO] Booting worker with pid: 6998
+[2017-09-07 19:53:08 +0000] [6999] [INFO] Booting worker with pid: 6999
+[2017-09-07 19:53:08 +0000] [6984] [DEBUG] 4 workers
+[2017-09-07 19:53:18 +0000] [6984] [INFO] Handling signal: int
+[2017-09-07 11:53:18 +0000] [6998] [INFO] Worker exiting (pid: 6998)
+[2017-09-07 11:53:18 +0000] [6995] [INFO] Worker exiting (pid: 6995)
+[2017-09-07 11:53:18 +0000] [6992] [INFO] Worker exiting (pid: 6992)
+[2017-09-07 11:53:18 +0000] [6999] [INFO] Worker exiting (pid: 6999)
+[2017-09-07 19:53:18 +0000] [6984] [INFO] Shutting down: Master
+[2017-09-07 19:54:04 +0000] [7068] [DEBUG] Current configuration:
+  proxy_protocol: False
+  worker_connections: 1000
+  statsd_host: None
+  max_requests_jitter: 0
+  post_fork: <function post_fork at 0x7f53e046cb18>
+  errorlog: /opt/tools/lyanadmin/run/lyanadmin.log
+  enable_stdio_inheritance: False
+  worker_class: sync
+  ssl_version: 2
+  suppress_ragged_eofs: True
+  syslog: False
+  syslog_facility: user
+  when_ready: <function when_ready at 0x7f53e046c848>
+  pre_fork: <function pre_fork at 0x7f53e046c9b0>
+  cert_reqs: 0
+  preload_app: False
+  keepalive: 2
+  accesslog: None
+  group: 1000
+  graceful_timeout: 30
+  do_handshake_on_connect: False
+  spew: False
+  workers: 4
+  proc_name: lyanadmin
+  sendfile: None
+  pidfile: None
+  umask: 0
+  on_reload: <function on_reload at 0x7f53e046c6e0>
+  pre_exec: <function pre_exec at 0x7f53e0472140>
+  worker_tmp_dir: None
+  limit_request_fields: 100
+  pythonpath: None
+  on_exit: <function on_exit at 0x7f53e0472938>
+  config: None
+  logconfig: None
+  check_config: False
+  statsd_prefix: 
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  reload_engine: auto
+  proxy_allow_ips: ['127.0.0.1']
+  pre_request: <function pre_request at 0x7f53e04722a8>
+  post_request: <function post_request at 0x7f53e0472398>
+  forwarded_allow_ips: ['127.0.0.1']
+  worker_int: <function worker_int at 0x7f53e046cde8>
+  raw_paste_global_conf: []
+  threads: 1
+  max_requests: 0
+  chdir: /opt/tools/lyanadmin
+  daemon: False
+  user: 1000
+  limit_request_line: 4094
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  certfile: None
+  on_starting: <function on_starting at 0x7f53e046c578>
+  post_worker_init: <function post_worker_init at 0x7f53e046cc80>
+  child_exit: <function child_exit at 0x7f53e0472500>
+  worker_exit: <function worker_exit at 0x7f53e0472668>
+  paste: None
+  default_proc_name: lyanadmin.wsgi:application
+  syslog_addr: udp://localhost:514
+  syslog_prefix: None
+  ciphers: TLSv1
+  worker_abort: <function worker_abort at 0x7f53e046cf50>
+  loglevel: debug
+  bind: ['127.0.0.1:8000']
+  raw_env: []
+  initgroups: False
+  capture_output: False
+  reload: False
+  limit_request_field_size: 8190
+  nworkers_changed: <function nworkers_changed at 0x7f53e04727d0>
+  timeout: 30
+  keyfile: None
+  ca_certs: None
+  tmp_upload_dir: None
+  backlog: 2048
+  logger_class: gunicorn.glogging.Logger
+[2017-09-07 19:54:04 +0000] [7068] [INFO] Starting gunicorn 19.7.1
+[2017-09-07 19:54:04 +0000] [7068] [DEBUG] Arbiter booted
+[2017-09-07 19:54:04 +0000] [7068] [INFO] Listening at: http://127.0.0.1:8000 (7068)
+[2017-09-07 19:54:04 +0000] [7068] [INFO] Using worker: sync
+[2017-09-07 19:54:04 +0000] [7075] [INFO] Booting worker with pid: 7075
+[2017-09-07 19:54:04 +0000] [7078] [INFO] Booting worker with pid: 7078
+[2017-09-07 19:54:04 +0000] [7081] [INFO] Booting worker with pid: 7081
+[2017-09-07 19:54:04 +0000] [7082] [INFO] Booting worker with pid: 7082
+[2017-09-07 19:54:04 +0000] [7068] [DEBUG] 4 workers
+[2017-09-07 19:54:13 +0000] [7068] [INFO] Handling signal: int
+[2017-09-07 11:54:13 +0000] [7075] [INFO] Worker exiting (pid: 7075)
+[2017-09-07 11:54:13 +0000] [7078] [INFO] Worker exiting (pid: 7078)
+[2017-09-07 11:54:13 +0000] [7081] [INFO] Worker exiting (pid: 7081)
+[2017-09-07 11:54:13 +0000] [7082] [INFO] Worker exiting (pid: 7082)
+[2017-09-07 19:54:13 +0000] [7068] [INFO] Shutting down: Master
+[2017-09-07 19:54:55 +0000] [7126] [DEBUG] Current configuration:
+  proxy_protocol: False
+  worker_connections: 1000
+  statsd_host: None
+  max_requests_jitter: 0
+  post_fork: <function post_fork at 0x7fe68926ab18>
+  errorlog: /opt/tools/lyanadmin/run/lyanadmin.log
+  enable_stdio_inheritance: False
+  worker_class: sync
+  ssl_version: 2
+  suppress_ragged_eofs: True
+  syslog: False
+  syslog_facility: user
+  when_ready: <function when_ready at 0x7fe68926a848>
+  pre_fork: <function pre_fork at 0x7fe68926a9b0>
+  cert_reqs: 0
+  preload_app: False
+  keepalive: 2
+  accesslog: None
+  group: 1000
+  graceful_timeout: 30
+  do_handshake_on_connect: False
+  spew: False
+  workers: 4
+  proc_name: lyanadmin
+  sendfile: None
+  pidfile: None
+  umask: 0
+  on_reload: <function on_reload at 0x7fe68926a6e0>
+  pre_exec: <function pre_exec at 0x7fe689270140>
+  worker_tmp_dir: None
+  limit_request_fields: 100
+  pythonpath: None
+  on_exit: <function on_exit at 0x7fe689270938>
+  config: None
+  logconfig: None
+  check_config: False
+  statsd_prefix: 
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  reload_engine: auto
+  proxy_allow_ips: ['127.0.0.1']
+  pre_request: <function pre_request at 0x7fe6892702a8>
+  post_request: <function post_request at 0x7fe689270398>
+  forwarded_allow_ips: ['127.0.0.1']
+  worker_int: <function worker_int at 0x7fe68926ade8>
+  raw_paste_global_conf: []
+  threads: 1
+  max_requests: 0
+  chdir: /opt/tools/lyanadmin
+  daemon: False
+  user: 1000
+  limit_request_line: 4094
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  certfile: None
+  on_starting: <function on_starting at 0x7fe68926a578>
+  post_worker_init: <function post_worker_init at 0x7fe68926ac80>
+  child_exit: <function child_exit at 0x7fe689270500>
+  worker_exit: <function worker_exit at 0x7fe689270668>
+  paste: None
+  default_proc_name: lyanadmin.wsgi:application
+  syslog_addr: udp://localhost:514
+  syslog_prefix: None
+  ciphers: TLSv1
+  worker_abort: <function worker_abort at 0x7fe68926af50>
+  loglevel: debug
+  bind: ['127.0.0.1:8000']
+  raw_env: []
+  initgroups: False
+  capture_output: False
+  reload: False
+  limit_request_field_size: 8190
+  nworkers_changed: <function nworkers_changed at 0x7fe6892707d0>
+  timeout: 30
+  keyfile: None
+  ca_certs: None
+  tmp_upload_dir: None
+  backlog: 2048
+  logger_class: gunicorn.glogging.Logger
+[2017-09-07 19:54:55 +0000] [7126] [INFO] Starting gunicorn 19.7.1
+[2017-09-07 19:54:55 +0000] [7126] [DEBUG] Arbiter booted
+[2017-09-07 19:54:55 +0000] [7126] [INFO] Listening at: http://127.0.0.1:8000 (7126)
+[2017-09-07 19:54:55 +0000] [7126] [INFO] Using worker: sync
+[2017-09-07 19:54:55 +0000] [7137] [INFO] Booting worker with pid: 7137
+[2017-09-07 19:54:55 +0000] [7138] [INFO] Booting worker with pid: 7138
+[2017-09-07 19:54:55 +0000] [7141] [INFO] Booting worker with pid: 7141
+[2017-09-07 19:54:55 +0000] [7144] [INFO] Booting worker with pid: 7144
+[2017-09-07 19:54:55 +0000] [7126] [DEBUG] 4 workers
+[2017-09-07 11:54:57 +0000] [7137] [DEBUG] GET /asset/asset_list/
+[2017-09-07 11:54:57 +0000] [7137] [DEBUG] POST /asset/get_asset_list/
+[2017-09-07 11:55:05 +0000] [7138] [DEBUG] POST /asset/btn_create/
+[2017-09-07 11:55:18 +0000] [7137] [DEBUG] POST /asset/asset_create/
+[2017-09-07 11:55:18 +0000] [7137] [DEBUG] POST /asset/get_asset_list/
+[2017-09-07 19:55:30 +0000] [7126] [INFO] Handling signal: int
+[2017-09-07 11:55:30 +0000] [7144] [INFO] Worker exiting (pid: 7144)
+[2017-09-07 11:55:30 +0000] [7137] [INFO] Worker exiting (pid: 7137)
+[2017-09-07 11:55:30 +0000] [7138] [INFO] Worker exiting (pid: 7138)
+[2017-09-07 11:55:30 +0000] [7141] [INFO] Worker exiting (pid: 7141)
+[2017-09-07 19:55:30 +0000] [7126] [INFO] Shutting down: Master
+[2017-09-07 19:59:34 +0000] [7484] [DEBUG] Current configuration:
+  proxy_protocol: False
+  worker_connections: 1000
+  statsd_host: None
+  max_requests_jitter: 0
+  post_fork: <function post_fork at 0x7fada5008b18>
+  errorlog: /opt/tools/lyanadmin/run/lyanadmin.log
+  enable_stdio_inheritance: False
+  worker_class: sync
+  ssl_version: 2
+  suppress_ragged_eofs: True
+  syslog: False
+  syslog_facility: user
+  when_ready: <function when_ready at 0x7fada5008848>
+  pre_fork: <function pre_fork at 0x7fada50089b0>
+  cert_reqs: 0
+  preload_app: False
+  keepalive: 2
+  accesslog: None
+  group: 1000
+  graceful_timeout: 30
+  do_handshake_on_connect: False
+  spew: False
+  workers: 4
+  proc_name: lyanadmin
+  sendfile: None
+  pidfile: /opt/tools/lyanadmin/run/lyanadmin.pid
+  umask: 0
+  on_reload: <function on_reload at 0x7fada50086e0>
+  pre_exec: <function pre_exec at 0x7fada500e140>
+  worker_tmp_dir: None
+  limit_request_fields: 100
+  pythonpath: None
+  on_exit: <function on_exit at 0x7fada500e938>
+  config: None
+  logconfig: None
+  check_config: False
+  statsd_prefix: 
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  reload_engine: auto
+  proxy_allow_ips: ['127.0.0.1']
+  pre_request: <function pre_request at 0x7fada500e2a8>
+  post_request: <function post_request at 0x7fada500e398>
+  forwarded_allow_ips: ['127.0.0.1']
+  worker_int: <function worker_int at 0x7fada5008de8>
+  raw_paste_global_conf: []
+  threads: 1
+  max_requests: 0
+  chdir: /opt/tools/lyanadmin
+  daemon: True
+  user: 1000
+  limit_request_line: 4094
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  certfile: None
+  on_starting: <function on_starting at 0x7fada5008578>
+  post_worker_init: <function post_worker_init at 0x7fada5008c80>
+  child_exit: <function child_exit at 0x7fada500e500>
+  worker_exit: <function worker_exit at 0x7fada500e668>
+  paste: None
+  default_proc_name: lyanadmin.wsgi:application
+  syslog_addr: udp://localhost:514
+  syslog_prefix: None
+  ciphers: TLSv1
+  worker_abort: <function worker_abort at 0x7fada5008f50>
+  loglevel: debug
+  bind: ['127.0.0.1:8000']
+  raw_env: []
+  initgroups: False
+  capture_output: False
+  reload: False
+  limit_request_field_size: 8190
+  nworkers_changed: <function nworkers_changed at 0x7fada500e7d0>
+  timeout: 30
+  keyfile: None
+  ca_certs: None
+  tmp_upload_dir: None
+  backlog: 2048
+  logger_class: gunicorn.glogging.Logger
+[2017-09-07 19:59:34 +0000] [7484] [INFO] Starting gunicorn 19.7.1
+[2017-09-07 19:59:34 +0000] [7484] [DEBUG] Arbiter booted
+[2017-09-07 19:59:34 +0000] [7484] [INFO] Listening at: http://127.0.0.1:8000 (7484)
+[2017-09-07 19:59:34 +0000] [7484] [INFO] Using worker: sync
+[2017-09-07 19:59:34 +0000] [7489] [INFO] Booting worker with pid: 7489
+[2017-09-07 19:59:34 +0000] [7492] [INFO] Booting worker with pid: 7492
+[2017-09-07 19:59:34 +0000] [7495] [INFO] Booting worker with pid: 7495
+[2017-09-07 19:59:34 +0000] [7496] [INFO] Booting worker with pid: 7496
+[2017-09-07 19:59:34 +0000] [7484] [DEBUG] 4 workers
+[2017-09-07 11:59:40 +0000] [7489] [DEBUG] GET /asset/asset_list/
+[2017-09-07 11:59:40 +0000] [7492] [DEBUG] POST /asset/get_asset_list/
+[2017-09-07 11:59:42 +0000] [7489] [DEBUG] GET /asset/asset_list/
+[2017-09-07 11:59:44 +0000] [7489] [DEBUG] POST /asset/get_asset_list/
+[2017-09-07 11:59:44 +0000] [7495] [DEBUG] POST /asset/btn_create/
+[2017-09-07 11:59:55 +0000] [7489] [DEBUG] POST /asset/asset_create/
+[2017-09-07 12:00:01 +0000] [7495] [DEBUG] GET /asset/asset_list/
+[2017-09-07 12:00:01 +0000] [7496] [DEBUG] POST /asset/get_asset_list/
+[2017-09-07 12:00:03 +0000] [7489] [DEBUG] POST /asset/btn_create/
+[2017-09-07 12:00:15 +0000] [7492] [DEBUG] POST /asset/asset_create/
+[2017-09-07 12:00:15 +0000] [7492] [DEBUG] POST /asset/get_asset_list/
+[2017-09-07 12:14:58 +0000] [7496] [INFO] Worker exiting (pid: 7496)
+[2017-09-07 20:14:59 +0000] [8660] [INFO] Booting worker with pid: 8660
+[2017-09-07 20:15:27 +0000] [7484] [INFO] Handling signal: term
+[2017-09-07 12:15:27 +0000] [7489] [INFO] Worker exiting (pid: 7489)
+[2017-09-07 12:15:27 +0000] [8660] [INFO] Worker exiting (pid: 8660)
+[2017-09-07 12:15:27 +0000] [7495] [INFO] Worker exiting (pid: 7495)
+[2017-09-07 12:15:27 +0000] [7492] [INFO] Worker exiting (pid: 7492)
+[2017-09-07 20:15:27 +0000] [7484] [INFO] Shutting down: Master
