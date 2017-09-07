@@ -24,7 +24,7 @@ SECRET_KEY = 'k+0-vap-sy(a)5_&__^j608rgok$xmtnb@d0fdjqtgv4=r59&7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 

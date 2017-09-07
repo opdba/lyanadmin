@@ -87,7 +87,9 @@ class SaltAPI(object):
 
         params = {'client': 'local_async', 'tgt': tgt, 'fun': 'state.sls', 'arg': arg}
         obj = urllib.urlencode(params)
+        print("obj is %s" % obj)
         content = self.postRequest(obj)
+        print("content is %s" % content)
         jid = content['return'][0]['jid']
         return jid
 

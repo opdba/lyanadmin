@@ -67,9 +67,9 @@ def module_deploy(request):
         ret = []
         action = request.GET.get('action')
         if action == 'deploy':
-            tgt = request.POST.get('tgt')
-            arg = request.POST.getlist('module')
-            tgtcheck = asset_models.NIC.objects.filter(name=tgt)
+            tgt = request.POST.get('tgt')  # 目标主机
+            arg = request.POST.getlist('module')  # 待部署model
+            tgtcheck = asset_models.NIC.objects.filter(name=tgt)  # 目标主机地址
             print(tgt, arg, tgtcheck)
             if tgtcheck:
                 models.Message.objects.create(type='salt', action='deploy', action_ip=tgt,
